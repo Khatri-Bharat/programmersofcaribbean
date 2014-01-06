@@ -2,6 +2,14 @@
 var express = require("express");
 var logfmt = require("logfmt");
 var ejs = require("ejs");
+var http = require("http");
+var querystring = require("querystring");
+
+/* oauth info */
+var clientId = "76b2e5167ea22c75ad14";
+var clientSecret = "5596e1881140f16745ccc7b7e38ad63283819633";
+var redirectUri = "http://programmers-of-caribbean.herokuapp.com/home";
+/* oauth info */
 
 var app = express();
 
@@ -15,6 +23,36 @@ app.configure(function() {
 app.get('/', function(req, res) {
 	res.render("../view/templates/landing.html");
 });
+
+/* Handle the OAuth response */
+app.get('/oauth', function(req, res) {
+	/* exchange the 'code' to get an access token and display it to the user. */
+	var postdata = querystring.stringify({
+		client_id: clientId,
+		client_secret: clientSecret,
+		code: req.query.code,
+		redirect_uri: redirectUri
+	});
+		
+	var options = {
+		host: 'https://github.com',
+		path: '/login/oauth/access_token',
+		method: 'POST',
+		headers: {
+			'content-type': 'application/x-www-form-urlencoded',
+			'content-length': Buffer.byteLength(postdata)
+		}
+	};	
+
+	var request = http.request(options, function(response) {
+		var responseQuery = querystring.parse(response);
+		res.send(responseQuery.access_token);		
+	});
+	
+	request.write(postdata);
+	request.end();
+});
+
 
 var port = process.env.PORT || 5000;
 app.listen(port);
