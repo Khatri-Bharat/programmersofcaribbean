@@ -2,7 +2,7 @@
   "name": "programmers-of-caribbean",
   "version": "0.0.0",
   "description": "A community of programmers willing to participate in projects for a cause.",
-  "main": "web.js",
+  "main": "controller/web.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
