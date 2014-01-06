@@ -46,7 +46,7 @@ app.get('/oauth', function(req, res) {
 
 	var request = https.request(options, function(response) {
 		var responseQuery = querystring.parse(response);
-		res.send(responseQuery.access_token);		
+		res.send(response.toString());		
 	});
 	
 	request.write(postdata);
