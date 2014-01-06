@@ -2,7 +2,7 @@
 var express = require("express");
 var logfmt = require("logfmt");
 var ejs = require("ejs");
-var http = require("http");
+var https = require("https");
 var querystring = require("querystring");
 
 /* oauth info */
@@ -35,7 +35,7 @@ app.get('/oauth', function(req, res) {
 	});
 		
 	var options = {
-		host: 'https://github.com',
+		host: 'github.com',
 		path: '/login/oauth/access_token',
 		method: 'POST',
 		headers: {
@@ -44,7 +44,7 @@ app.get('/oauth', function(req, res) {
 		}
 	};	
 
-	var request = http.request(options, function(response) {
+	var request = https.request(options, function(response) {
 		var responseQuery = querystring.parse(response);
 		res.send(responseQuery.access_token);		
 	});
