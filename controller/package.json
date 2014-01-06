@@ -1,0 +1,27 @@
+{
+  "name": "programmers-of-caribbean",
+  "version": "0.0.0",
+  "description": "A community of programmers willing to participate in projects for a cause.",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Khatri-Bharat/programmersofcaribbean.git"
+  },
+  "keywords": [
+    "heroku",
+    "programmers-of-caribbean",
+    "node"
+  ],
+  "author": "Bharat Khatri",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Khatri-Bharat/programmersofcaribbean/issues"
+  },
+  "dependencies": {
+    "logfmt": "~0.18.1",
+    "express": "~3.4.7"
+  }
+}
