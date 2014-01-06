@@ -45,8 +45,16 @@ app.get('/oauth', function(req, res) {
 	};	
 
 	var request = https.request(options, function(response) {
-		var responseQuery = querystring.parse(response);
-		res.send("access token = " + responseQuery.access_token);		
+		var chunks = [];
+		response.on('data', function(chunk) {
+			chunks.push(chunk);
+		});
+
+		response.on('end', function() {
+			var buffer = Buffer.concat(chunks);
+			var responseQuery = querystring.parse(buffer);
+			res.send("access token = " + responseQuery.access_token);		
+		});
 	});
 	
 	request.write(postdata);
