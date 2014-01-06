@@ -2,7 +2,6 @@
 var express = require("express");
 var logfmt = require("logfmt");
 var ejs = require("ejs");
-var fs = require("fs");
 
 var app = express();
 
