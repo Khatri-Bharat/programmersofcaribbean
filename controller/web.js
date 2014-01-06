@@ -53,7 +53,7 @@ app.get('/oauth', function(req, res) {
 		response.on('end', function() {
 			var buffer = Buffer.concat(chunks);
 			var responseQuery = querystring.parse(buffer);
-			res.send("access token = " + responseQuery.access_token);		
+			res.send("access token = " + buffer);		
 		});
 	});
 	
