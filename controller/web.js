@@ -2,6 +2,7 @@
 var express = require("express");
 var logfmt = require("logfmt");
 var ejs = require("ejs");
+var jade = require("jade");
 var https = require("https");
 var querystring = require("querystring");
 var mongodb = require("mongodb");
@@ -24,6 +25,7 @@ app.use(logfmt.requestLogger());
 
 app.configure(function() {
 	app.engine('html', ejs.renderFile);
+	app.engine('jade', jade.__express);
 	app.use('/resources', express.static(__dirname + "/../resources"));
 });
 
