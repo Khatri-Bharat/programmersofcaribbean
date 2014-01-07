@@ -72,11 +72,13 @@ app.get('/oauth', function(req, res) {
 
 app.get('/home', function(req, res) {
 	var accessToken = accessTokens[req.query.userid];
+	//var accessToken = "9e8ba2172cfa3b31c8e41dfd4741866752101b04";
 	var options = {
 		host: "api.github.com",
 		path: "/user",
 		method: "GET",
 		headers: {
+			'user-agent': 'Programmers of Caribbean',
 			'Authorization': 'token ' + accessToken
 		}
 	};
@@ -87,6 +89,7 @@ app.get('/home', function(req, res) {
 		});
 		response.on('end', function() {
 			var buffer = Buffer.concat(chunks);
+			console.log("response => " + buffer.toString());
 			var json = JSON.parse(buffer.toString());
 			res.render('../view/templates/home.jade', {'src': json.avatar_url, 'nick': json.login, 'email': json.email});
 		});
