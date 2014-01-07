@@ -5,7 +5,6 @@ var ejs = require("ejs");
 var jade = require("jade");
 var https = require("https");
 var querystring = require("querystring");
-var mongodb = require("mongodb");
 
 /* oauth info */
 var clientId = "76b2e5167ea22c75ad14";
