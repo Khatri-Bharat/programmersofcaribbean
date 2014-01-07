@@ -4,12 +4,19 @@ var logfmt = require("logfmt");
 var ejs = require("ejs");
 var https = require("https");
 var querystring = require("querystring");
+var mongodb = require("mongodb");
 
 /* oauth info */
 var clientId = "76b2e5167ea22c75ad14";
 var clientSecret = "5596e1881140f16745ccc7b7e38ad63283819633";
 var redirectUri = "http://programmers-of-caribbean.herokuapp.com/home";
 /* oauth info */
+
+/* access tokens */
+var accessTokens = [];
+var userId = 0;
+/* access tokens */
+
 
 var app = express();
 
@@ -53,7 +60,9 @@ app.get('/oauth', function(req, res) {
 		response.on('end', function() {
 			var buffer = Buffer.concat(chunks);
 			var responseQuery = querystring.parse(buffer.toString());
-			res.send("access token = " + responseQuery.access_token);		
+			accessTokens[userId++] = responseQuery.access_token;						
+			/* fetch user details using the access token */
+			res.render('../view/templates/menu.html');
 		});
 	});
 	
@@ -61,6 +70,29 @@ app.get('/oauth', function(req, res) {
 	request.end();
 });
 
+app.get('/home', function(req, res) {
+	var accessToken = accessTokens[req.query.userid];
+	var options = {
+		host: "api.github.com",
+		path: "/user",
+		method: "GET",
+		headers: {
+			'Authorization': 'token ' + accessToken
+		}
+	};
+	var request = https.request(options, function(response) {
+		var chunks = [];
+		response.on('data', function(chunk) {
+			chunks.push(chunk);
+		});
+		response.on('end', function() {
+			var buffer = Buffer.concat(chunks);
+			var json = JSON.parse(buffer.toString());
+			res.render('../view/templates/home.jade', {'src': json.avatar_url, 'nick': json.login, 'email': json.email});
+		});
+	});	
+	request.end();
+});
 
 var port = process.env.PORT || 5000;
 app.listen(port);
