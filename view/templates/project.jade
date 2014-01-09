@@ -1,0 +1,43 @@
+doctype html
+html
+	head
+		title Programmers of Caribbean
+	body
+		//- var projectEntries = []
+		//- projectEntries[0] = {}
+		//- projectEntries[0].title = "Demo Project"
+		//- projectEntries[0].description = "This is a demo project"
+		//- projectEntries[0].creator = {}
+		//- projectEntries[0].creator.name = "Bharat Khatri"
+		//- projectEntries[0].creator.avatar_url = "http://Bharat-Khatri.jpg"
+		//- projectEntries[0].contributors = []
+		//- projectEntries[0].contributors[0] = {}
+		//- projectEntries[0].contributors[0].name = "Bharat Khatri"
+		//- projectEntries[0].contributors[0].avatar_url = "http://Bharat-Khatri.jpg"
+		//- projectEntries[0].contributors[1] = {}
+		//- projectEntries[0].contributors[1].name = "Rajat Khanduja"
+		//- projectEntries[0].contributors[1].avatar_url = "http://Rajat-Khanduja.jpg"
+		//- projectEntries[0].upvotes = 5
+		//- projectEntries[0].downvotes = 2
+
+		- for (var i = 0; i < projectEntries.length; i++) {
+		div
+			h3	#{projectEntries[i].title}
+			p	#{projectEntries[i].description}
+			div
+				p Poster : #{projectEntries[i].creator.name}
+				p 
+					img(src="#{projectEntries[i].creator.avatar_url}")
+			div
+				p Contributors:
+				- for (var j = 0; j < projectEntries[i].contributors.length; j++) {
+				div
+					p Name : #{projectEntries[i].contributors[j].name}
+					p
+						img(src="#{projectEntries[i].contributors[j].avatar_url}") 
+				
+				- }
+			div
+				p Upvotes : #{projectEntries[i].upvotes}
+				p Downvotes : #{projectEntries[i].downvotes}
+		- }
