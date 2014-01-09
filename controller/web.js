@@ -5,6 +5,8 @@ var ejs = require("ejs");
 var jade = require("jade");
 var https = require("https");
 var querystring = require("querystring");
+var jsonServer = require("./jsonServer.js");
+
 
 /* oauth info */
 var clientId = "76b2e5167ea22c75ad14";
@@ -96,6 +98,12 @@ app.get('/home', function(req, res) {
 		});
 	});	
 	request.end();
+});
+
+
+app.get('/projects', function(req, res) {
+	var projectEntries = jsonServer.getRandomProjectEntries(10);
+	res.render('../view/templates/project.jade', {'projectEntries': projectEntries});	
 });
 
 var port = process.env.PORT || 5000;

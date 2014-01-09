@@ -47,7 +47,7 @@ function getRandomImageUrl() {
 		"downvotes": ""
 	}
 */
-function getProjectEntries(numEntries) {
+function getRandomProjectEntries(numEntries) {
 	var projectEntries = [];
 	for (var i = 0; i < numEntries; i++) {
 		projectEntries[i] = {};
@@ -69,4 +69,8 @@ function getProjectEntries(numEntries) {
 		projectEntries[i].downvotes = getRandomNumber(0, 50);
 	}
 	return projectEntries;
+}
+
+module.exports = {
+	getRandomProjectEntries: getRandomProjectEntries
 }
