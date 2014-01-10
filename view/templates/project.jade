@@ -23,7 +23,7 @@ html
 
 		- for (var i = 0; i < projectEntries.length; i++) {
 		div(class="discusBox")
-			img(src="#{projectEntries[i].creator.avatar_url}")	
+			img(src="#{projectEntries[i].creator.avatar_url}")
 
 			div(class="discusTitle")
 				h3	#{projectEntries[i].title}
@@ -35,18 +35,18 @@ html
 			div(class="discusMeta")
 
 				div(class="discusMetaVotes")
-					span 
+					span
 						p Upvotes : #{projectEntries[i].upvotes}
-					span 
+					span
 						p Downvotes : #{projectEntries[i].downvotes}
 
 				div(class="discusBy")
 					span Posted by #{projectEntries[i].creator.name}
-				 
+				
 				div(class="discusLink")
 				- for (var j = 0; j < projectEntries[i].contributors.length; j++) {
 					span
-						img(src="#{projectEntries[i].contributors[j].avatar_url}") 
+						img(src="#{projectEntries[i].contributors[j].avatar_url}")
 				
 				- }
 			
