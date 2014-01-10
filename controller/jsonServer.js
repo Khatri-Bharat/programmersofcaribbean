@@ -21,13 +21,56 @@ function getRandomLevel() {
 	return randomPick(levels);
 }
 
-function getRandomImageUrl() {
-	return "http://lorempixel.com/200/200/people/";
+function getRandomImageUrl(x, y) {
+	var r = Math.random();
+	return "http://lorempixel.com/" + x + "/" + y + "/people/?dummy=" + r.toString();
+}
+
+var alphabets = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+function getRandomWord() {
+	var numCharacters = getRandomNumber(3, 7);
+	var word = randomPick(alphabets);
+	for (var i = 0; i < numCharacters - 1; i++) {
+		word += randomPick(alphabets);
+	}
+	return word;
+}
+
+
+function capitalize(s) {
+	return s[0].toUpperCase() + s.substr(1);
+}
+
+function getRandomSentence(minLength, maxLength, capitalize) {
+	var numWords = getRandomNumber(minLength, maxLength);
+	var sentence = getRandomWord();
+	for (var i = 0; i < numWords-1; i++) {
+		sentence += " " + getRandomWord();
+	}
+	sentence += ".";
+	capitalize = (typeof capitalize == "undefined")?true:capitalize;
+	return capitalize?capitalize(sentence):sentence;
+}
+
+function getRandomTitle() {
+	return getRandomSentence(5,10);
+}
+
+function getRandomDescription() {
+	var numSentences = getRandomNumber(2,5);
+	var description = getRandomSentence(7, 10);
+	for (var i = 0; i < numSentences - 1; i++) {
+		description += " " + getRandomSentence(7,10);
+	}
+	return description;
 }
 
 /*
 	-- JSON format for project entry -- 
 	{
+		"title" :
+		"description" :
 		"creator" : {
 			"avatar_url": "",
 			"name": ""
@@ -41,7 +84,6 @@ function getRandomImageUrl() {
 
 			}
 		],
-		"numContributors": "",
 		"level": "",
 		"upvotes": "",
 		"downvotes": ""
@@ -52,15 +94,17 @@ function getRandomProjectEntries(numEntries) {
 	for (var i = 0; i < numEntries; i++) {
 		projectEntries[i] = {};
 		
+		projectEntries[i].title = getRandomTitle();
+		projectEntries[i].description = getRandomDescription();
 		projectEntries[i].creator = {};
-		projectEntries[i].creator.avatar_url = getRandomImageUrl();
+		projectEntries[i].creator.avatar_url = getRandomImageUrl(120, 120);
 		projectEntries[i].creator.name = getRandomName();
 
 		projectEntries[i].contributors = [];
 		var randomNumContributors = getRandomNumber(1, 10);
 		for (var j = 0; j < randomNumContributors; j++) {
 			projectEntries[i].contributors[j] = {};
-			projectEntries[i].contributors[j].avatar_url = getRandomImageUrl();
+			projectEntries[i].contributors[j].avatar_url = getRandomImageUrl(40, 40);
 			projectEntries[i].contributors[j].name = getRandomName();
 		}
 

@@ -2,6 +2,7 @@ doctype html
 html
 	head
 		title Programmers of Caribbean
+		link(rel="stylesheet", href="../../resources/css/discus.css", type="text/css")
 	body
 		//- var projectEntries = []
 		//- projectEntries[0] = {}
@@ -21,23 +22,32 @@ html
 		//- projectEntries[0].downvotes = 2
 
 		- for (var i = 0; i < projectEntries.length; i++) {
-		div
-			h3	#{projectEntries[i].title}
-			p	#{projectEntries[i].description}
-			div
-				p Poster : #{projectEntries[i].creator.name}
-				p 
-					img(src="#{projectEntries[i].creator.avatar_url}")
-			div
-				p Contributors:
+		div(class="discusBox")
+			img(src="#{projectEntries[i].creator.avatar_url}")	
+
+			div(class="discusTitle")
+				h3	#{projectEntries[i].title}
+
+			div(class="discusBrief")
+				p	#{projectEntries[i].description}
+
+
+			div(class="discusMeta")
+
+				div(class="discusMetaVotes")
+					span 
+						p Upvotes : #{projectEntries[i].upvotes}
+					span 
+						p Downvotes : #{projectEntries[i].downvotes}
+
+				div(class="discusBy")
+					span Posted by #{projectEntries[i].creator.name}
+				 
+				div(class="discusLink")
 				- for (var j = 0; j < projectEntries[i].contributors.length; j++) {
-				div
-					p Name : #{projectEntries[i].contributors[j].name}
-					p
+					span
 						img(src="#{projectEntries[i].contributors[j].avatar_url}") 
 				
 				- }
-			div
-				p Upvotes : #{projectEntries[i].upvotes}
-				p Downvotes : #{projectEntries[i].downvotes}
+			
 		- }
