@@ -42,15 +42,15 @@ function capitalize(s) {
 	return s[0].toUpperCase() + s.substr(1);
 }
 
-function getRandomSentence(minLength, maxLength, capitalize) {
+function getRandomSentence(minLength, maxLength, toCapitalize) {
 	var numWords = getRandomNumber(minLength, maxLength);
 	var sentence = getRandomWord();
 	for (var i = 0; i < numWords-1; i++) {
 		sentence += " " + getRandomWord();
 	}
 	sentence += ".";
-	capitalize = (typeof capitalize == "undefined")?true:capitalize;
-	return capitalize?capitalize(sentence):sentence;
+	toCapitalize = (typeof toCapitalize == "undefined")?true:toCapitalize;
+	return toCapitalize?capitalize(sentence):sentence;
 }
 
 function getRandomTitle() {
