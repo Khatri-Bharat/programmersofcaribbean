@@ -106,5 +106,10 @@ app.get('/projects', function(req, res) {
 	res.render('../view/templates/project.jade', {'projectEntries': projectEntries});	
 });
 
+app.get('/proposal', function(req, res) {
+	res.render('../view/templates/proposal.jade');
+});
+
+
 var port = process.env.PORT || 5000;
 app.listen(port);

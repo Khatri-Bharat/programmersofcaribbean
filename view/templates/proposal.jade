@@ -1,0 +1,12 @@
+doctype html
+html
+	head
+		script(src="/resources/js/bower_components/sir-trevor-js/sir-trevor.min.js, type="text/javascript")
+		link(rel="stylesheet", src="/resources/js/bower_components/sir-trevor-js/sir-trevor.css", type="text/css")
+		link(rel="stylesheet", src="/resources/js/bower_components/sir-trevor-js/sir-trevor-icons.css", type="text/css")
+	body
+		form
+			textarea(class="js-st-instance")
+		script(type="text/javascript").
+			new SirTrevor.Editor({ el: $('.js-st-instance')});	
+					

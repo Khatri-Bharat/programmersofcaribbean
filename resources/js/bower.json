@@ -1,0 +1,6 @@
+{
+	"name": "programmers-of-caribbean",
+	"dependencies": {
+		"sir-trevor-js": "0.3.0"
+	}
+}
