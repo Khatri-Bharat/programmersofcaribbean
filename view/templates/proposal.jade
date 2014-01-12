@@ -54,6 +54,6 @@ html
 				$publish.click(function() {
 					/* save data to dataStore */
 					proposalEditor.onFormSubmit();
-					pushDataToServer(proposalEditor.$el.val());	
+					pushDataToServer(JSON.parse(proposalEditor.$el.val()));	
 				});
 			});					
