@@ -34,12 +34,19 @@ html
 				console.log("pushing data to the server ...");
 				/* create an AJAX POST request */
 				var sirTrevorJsonEndpoint = "http://programmers-of-caribbean.herokuapp.com/sir-trevor-json/";
-				$.post(sirTrevorJsonEndpoint, json, function(data) {
-					console.log("sir trevor json ajax callback");
-					var previewHtml = SirTrevorRenderer.render(data);
-					var $preview = $('#preview');
-					$preview.html(previewHtml);
-				});	
+				$.post(sirTrevorJsonEndpoint, json)
+					.done(function(data) {
+						console.log("sir trevor json ajax callback");
+						var previewHtml = SirTrevorRenderer.render(data);
+						var $preview = $('#preview');
+						$preview.html(previewHtml);
+					})
+					.fail(function() {
+						console.log("error in AJAX request");
+					})	
+					.always(function() {
+						console.log("finished ajax request");	
+					});
 			}
 			$(document).ready(function() {
 				var $publish = $('#publish');
