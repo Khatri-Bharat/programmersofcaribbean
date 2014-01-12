@@ -2,7 +2,7 @@
 	var root = this;
 	var SirTrevorRenderer = root.SirTrevorRenderer = {};
 	SirTrevorRenderer.render = function(json) {
-		var partials = _.map(json.data, SirTrevorRenderer.renderPartial(blockJson)); 	
+		var partials = _.map(json.data, function(blockJson) { SirTrevorRenderer.renderPartial(blockJson) }); 	
 		var html = partials.join("\n");
 		return html;
 	};
