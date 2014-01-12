@@ -16,7 +16,7 @@ html
 				a(href="#edit" data-toggle="tab") Edit
 			li
 				button(type="button" id="publish" class="btn btn-default btn-lg")
-					span(class="glyphicon gyphicon-open")
+					span(class="glyphicon glyphicon-open")
 					| Publish
 					
 
@@ -33,7 +33,7 @@ html
 			var pushDataToServer = function(json) {
 				console.log("pushing data to the server ...");
 				/* create an AJAX POST request */
-				var sirTrevorJsonEndpoint = "http://programmers-of-caribbean.herokuapp.com/sir-trevor-json/;
+				var sirTrevorJsonEndpoint = "http://programmers-of-caribbean.herokuapp.com/sir-trevor-json/";
 				$.post(sirTrevorJsonEndpoint, json, function(data) {
 					console.log("sir trevor json ajax callback");
 					var previewHtml = SirTrevorRenderer.render(data);
