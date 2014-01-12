@@ -114,10 +114,10 @@ app.get('/proposal', function(req, res) {
 app.post('/sir-trevor-json', function(req, res) {
 	var data = req.body;
 	/* store data in a file */
-	//var resData = data.toString();
+	var resData = data.toString();
 	res.header('content-type', "application/json");
-	res.header('content-length', data.length()); 
-	res.send(data);		
+	res.header('content-length', resData.length()); 
+	res.send(resData);		
 });
 
 var port = process.env.PORT || 5000;
