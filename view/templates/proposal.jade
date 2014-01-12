@@ -36,8 +36,9 @@ html
 				var sirTrevorJsonEndpoint = "http://programmers-of-caribbean.herokuapp.com/sir-trevor-json/";
 				$.post(sirTrevorJsonEndpoint, json)
 					.done(function(data) {
-						console.log("sir trevor json ajax callback");
-						var previewHtml = SirTrevorRenderer.render(JSON.parse(data));
+						console.log("sir trevor json ajax callback with data = " + data + " in string " + data.toString());
+						var json = JSON.parse(data);
+						var previewHtml = SirTrevorRenderer.render(json);
 						var $preview = $('#preview');
 						$preview.html(previewHtml);
 					})
