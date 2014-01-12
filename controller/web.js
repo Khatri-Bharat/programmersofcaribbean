@@ -27,6 +27,7 @@ app.use(logfmt.requestLogger());
 app.configure(function() {
 	app.engine('html', ejs.renderFile);
 	app.engine('jade', jade.__express);
+	app.use(express.bodyParser());
 	app.use('/resources', express.static(__dirname + "/../resources"));
 });
 
@@ -110,6 +111,14 @@ app.get('/proposal', function(req, res) {
 	res.render('../view/templates/proposal.jade');
 });
 
+app.post('/sir-trevor-json', function(req, res) {
+	var data = req.body.data;
+	/* store data in a file */
+	var resData = data.toString();
+	res.headers['content-type'] = "application/json";
+	res.headers['content-length'] = resData.length(); 
+	res.send(resData);		
+});
 
 var port = process.env.PORT || 5000;
 app.listen(port);

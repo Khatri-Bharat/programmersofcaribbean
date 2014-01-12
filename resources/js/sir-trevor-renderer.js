@@ -4,6 +4,7 @@
 	SirTrevorRenderer.render = function(json) {
 		var partials = _.map(json.data, SirTrevorRenderer.renderPartial(blockJson)); 	
 		var html = partials.join("\n");
+		return html;
 	};
 
 	SirTrevorRenderer.renderPartial = function(blockJson) {

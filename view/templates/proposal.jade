@@ -15,16 +15,37 @@ html
 			li
 				a(href="#edit" data-toggle="tab") Edit
 			li
-				a(href="#publish" data-toggle="tab") Publish
+				button(type="button" id="publish" class="btn btn-default btn-lg")
+					span(class="glyphicon gyphicon-open")
+					| Publish
+					
 
 		div(class="tab-content")
 			div(class="tab-pane active", id="preview")
 			div(class="tab-pane", id="edit")
 				form
 					textarea(class="js-st-instance")
-			div(class="tab-pane", id="publish")			
 		
-		script(type="text/javascript").
-			var proposalEditor = new SirTrevor.Editor({ el: $('.js-st-instance')});	
 		script(src="/resources/css/vendor/bootstrap/js/bootstrap.min.js", type="text/javascript")		
-					
+		script(src="/resources/js/sir-trevor-renderer.js", type="text/javascript")
+		script(type="text/javascript").
+			var proposalEditor = new SirTrevor.Editor({ el: $('.js-st-instance')});
+			var pushDataToServer = function(json) {
+				console.log("pushing data to the server ...");
+				/* create an AJAX POST request */
+				var sirTrevorJsonEndpoint = "http://programmers-of-caribbean.herokuapp.com/sir-trevor-json/;
+				$.post(sirTrevorJsonEndpoint, json, function(data) {
+					console.log("sir trevor json ajax callback");
+					var previewHtml = SirTrevorRenderer.render(data);
+					var $preview = $('#preview');
+					$preview.html(previewHtml);
+				});	
+			}
+			$(document).ready(function() {
+				var $publish = $('#publish');
+				$publish.click(function() {
+					/* save data to dataStore */
+					proposalEditor.onFormSubmit();
+					pushDataToServer(proposalEditor.$el.val());	
+				});
+			});					
