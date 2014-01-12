@@ -116,7 +116,7 @@ app.post('/sir-trevor-json', function(req, res) {
 	/* store data in a file */
 	var resData = data.toString();
 	res.header('content-type', "application/json");
-	res.header('content-length', resData.length()); 
+	res.header('content-length', resData.length); 
 	res.send(resData);		
 });
 
