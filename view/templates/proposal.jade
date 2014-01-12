@@ -37,7 +37,7 @@ html
 				$.post(sirTrevorJsonEndpoint, json)
 					.done(function(data) {
 						console.log("sir trevor json ajax callback");
-						var previewHtml = SirTrevorRenderer.render(data);
+						var previewHtml = SirTrevorRenderer.render(JSON.parse(data));
 						var $preview = $('#preview');
 						$preview.html(previewHtml);
 					})
